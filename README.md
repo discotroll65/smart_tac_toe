@@ -1,7 +1,6 @@
 # SmartTacToe
 
-TODO: Write a gem description
-
+A gem to assist in playing tic tac toe against an unbeatable computer opponent
 ## Installation
 
 Add this line to your application's Gemfile:
