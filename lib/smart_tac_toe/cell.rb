@@ -1,5 +1,3 @@
-require_relative "../smart_tac_toe.rb"
-
 module SmartTacToe
   class Cell
     attr_accessor :value
@@ -8,4 +6,3 @@ module SmartTacToe
     end
   end
 end
-
