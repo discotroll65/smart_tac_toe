@@ -1,4 +1,4 @@
-require "smart_tac_toe/version"
+require_relative "smart_tac_toe/version"
 
 module SmartTacToe
 end

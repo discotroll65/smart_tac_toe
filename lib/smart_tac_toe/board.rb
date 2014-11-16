@@ -22,6 +22,18 @@ module SmartTacToe
     def win_combos
       grid + grid.transpose + diagonals
     end
+
+    def win? (cell_combo)
+      result = cell_combo.map {|square| square.value}      
+      result.uniq.length == 1 && result[0] != ""
+    end
+
+    def terminal_display
+      grid.each do |row|
+        puts " #{row[0].value} | #{row[1].value} | #{row[2].value}"
+        puts "===+===+==="
+      end
+    end
 private
     def self.default
       default_grid = Array.new(3) {Array.new(3) {Cell.new} }
@@ -37,3 +49,5 @@ private
 
   end
 end
+
+
