@@ -14,6 +14,14 @@ module SmartTacToe
       cell = grid[row][col]
       cell.value = input
     end
+
+    def diagonals
+      [  [ grid[0][0],grid[1][1],grid[2][2] ] ,  [  grid[0][2],grid[1][1],grid[2][0]  ]  ]
+    end
+
+    def win_combos
+      grid + grid.transpose + diagonals
+    end
 private
     def self.default
       default_grid = Array.new(3) {Array.new(3) {Cell.new} }
@@ -26,5 +34,6 @@ private
         end
       end
     end
+
   end
 end

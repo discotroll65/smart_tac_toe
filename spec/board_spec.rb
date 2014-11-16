@@ -43,7 +43,7 @@ module SmartTacToe
     end
   end
 
-  describe Board, ".default" do
+  describe Board, "Board.default" do
     it "creates an array that would correspond to a fresh tictactoe grid" do
       values_array = []
       grid = Board.default
@@ -55,8 +55,35 @@ module SmartTacToe
       end
 
       expect(values_array).to eq (1..9).map { |element| element.to_s}
-
     end
+  end
 
+  describe Board, "#diagonals" do
+    it "creates arrays of the diagonals of the board grid" do
+      board = Board.new
+      diags = board.diagonals
+
+      board.fill_cell(0,0,"X")
+      board.fill_cell(1,1,"X")
+      board.fill_cell(2,2,"X")
+
+      value_array_x = diags[0].map {|square| square.value}
+      expect(value_array_x).to eq ["X","X","X"]
+     
+      board.fill_cell(0,2,"O")
+      board.fill_cell(1,1,"O")
+      board.fill_cell(2,0,"O")
+      
+      value_array_o = diags[1].map {|square| square.value}
+      expect(value_array_o).to eq ["O","O","O"]
+     
+    end
+  end
+
+  describe Board, "#wincombos" do
+    it "creates an array of all possible win combos" do
+      board = Board.new
+      expect(board.win_combos.size).to eq 8
+    end
   end
 end
