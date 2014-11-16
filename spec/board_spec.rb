@@ -87,7 +87,7 @@ module SmartTacToe
     end
   end
 
-  describe Board, "#win?" do
+  describe Board, "#combo_win?" do
     it "Returns true for a wincombo all filled in" do
       board = Board.new
       board.fill_cell(0,0,"X")
@@ -95,7 +95,7 @@ module SmartTacToe
       board.fill_cell(0,2,"X")
       top_horizontal = board.win_combos[0]
 
-      result = board.win?(top_horizontal)
+      result = board.combo_win?(top_horizontal)
       expect(result).to eq true      
     end
 
@@ -106,9 +106,30 @@ module SmartTacToe
       board.fill_cell(0,2,"O")
       top_horizontal = board.win_combos[0]
 
-      result = board.win?(top_horizontal)
+      result = board.combo_win?(top_horizontal)
       expect(result).to eq false      
     end
  
+  end
+
+  describe Board, "#game_won?" do
+    it "returns true if a player has filled up a winning combo" do
+      board = Board.new
+      board.fill_cell(2,0,"X")
+      board.fill_cell(2,1,"X")
+      board.fill_cell(2,2,"X")
+
+      expect(board.game_won?).to eq true
+    end
+
+    it "returns false if a player has filled up a winning combo" do
+      board = Board.new
+      board.fill_cell(2,0,"O")
+      board.fill_cell(2,1,"X")
+      board.fill_cell(2,2,"X")
+
+      expect(board.game_won?).to eq false
+    end
+
   end
 end

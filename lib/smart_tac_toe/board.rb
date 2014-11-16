@@ -23,9 +23,22 @@ module SmartTacToe
       grid + grid.transpose + diagonals
     end
 
-    def win? (cell_combo)
+    def combo_win? (cell_combo)
       result = cell_combo.map {|square| square.value}      
       result.uniq.length == 1 && result[0] != ""
+    end
+
+    def game_won?
+      result = false
+
+      win_combos.each do |combo|
+        if combo_win?(combo)
+          result = true
+          break
+        end
+      end
+      result
+
     end
 
     def terminal_display
