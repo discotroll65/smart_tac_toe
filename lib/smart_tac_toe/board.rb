@@ -1,7 +1,8 @@
-#require "spec_helper"
+require_relative "./strategy.rb"
 module SmartTacToe
   class Board
     attr_accessor :grid
+    include Strategy
     def initialize (input = Board.default)
       @grid = input
     end
