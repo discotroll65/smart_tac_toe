@@ -1,3 +1,4 @@
+#require "spec_helper"
 module SmartTacToe
   class Board
     attr_accessor :grid
@@ -46,6 +47,28 @@ module SmartTacToe
         puts " #{row[0].value} | #{row[1].value} | #{row[2].value}"
         puts "===+===+==="
       end
+    end
+
+    def game_tied?
+      result = true
+      result = false if available_moves.size != 0
+      result
+    end
+
+    def available_moves
+      all_moves = (1..9).to_a.map {|move| move.to_s}
+      move_array = []
+
+      grid.each do |row|
+        row.each do |square|
+          union =  ([square.value] & all_moves) 
+          if union != []
+            move_array << union[0]
+          end
+        end
+      end
+
+      move_array
     end
 private
     def self.default

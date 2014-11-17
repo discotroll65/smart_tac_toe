@@ -132,4 +132,62 @@ module SmartTacToe
     end
 
   end
+
+  describe Board, "#game_tied?" do
+    it "returns true if all squares are taken up" do
+      board = Board.new
+      marker = -1
+
+      board.grid.each do |row|
+        row.each do |square|
+          if marker > 0
+            square.value = "X"
+          else
+            square.value = "O"
+          end
+          marker *= -1
+        end
+      end
+
+      expect(board.game_tied?).to eq true
+    end
+  end
+
+  describe Board, "#available_moves" do
+    it "returns an array of available moves" do
+      board = Board.new
+      all_moves = (1..9).to_a.map {|move| move.to_s}
+      
+      expect(board.available_moves).to eq all_moves
+
+      board.fill_cell(0,0,"X")
+      expect(board.available_moves).to eq all_moves - ["1"]
+
+      board.fill_cell(0,1,"O")
+      expect(board.available_moves).to eq all_moves - ((1..2).to_a.map {|move| move.to_s})
+
+      board.fill_cell(0,2,"X")
+      expect(board.available_moves).to eq all_moves - ((1..3).to_a.map {|move| move.to_s})
+      
+      board.fill_cell(1,0,"O")
+      expect(board.available_moves).to eq all_moves - ((1..4).to_a.map {|move| move.to_s})
+
+      board.fill_cell(1,1,"X")
+      expect(board.available_moves).to eq all_moves - ((1..5).to_a.map {|move| move.to_s})
+
+      board.fill_cell(1,2,"O")
+      expect(board.available_moves).to eq all_moves - ((1..6).to_a.map {|move| move.to_s})
+
+      board.fill_cell(2,0,"X")
+      expect(board.available_moves).to eq all_moves - ((1..7).to_a.map {|move| move.to_s})
+
+      board.fill_cell(2,1,"O")
+      expect(board.available_moves).to eq all_moves - ((1..8).to_a.map {|move| move.to_s})
+
+      board.fill_cell(2,2,"X")
+      expect(board.available_moves).to eq []
+
+
+    end
+  end
 end

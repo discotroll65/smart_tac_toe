@@ -32,6 +32,7 @@ module SmartTacToe
         puts "HAL must first be built!" 
         return 
       end
+      puts"\n\n\n\n"
 
       while true
 
@@ -44,13 +45,14 @@ module SmartTacToe
 
         enter_terminal(move)
 
-        break if board.game_won?
+        break if board.game_won? || board.game_tied?
         switch_turn
       end
 
       board.terminal_display
       puts "Game Over!"
-      puts "#{current_marker} wins!"
+      puts "#{current_marker} wins!" if board.game_won?
+      puts "Cat's Game!" if board.game_tied?
       puts "~~~~~~~~~~~~~~~~~~~~"
 
     end
