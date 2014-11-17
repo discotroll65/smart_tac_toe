@@ -31,4 +31,30 @@ module SmartTacToe
 
     end
   end
+
+  describe Game, "#move_valid?" do
+    it "returns false if a move is already taken" do
+      game = Game.new
+      game.board.fill_cell(1,1,"X")
+
+      expect(game.move_valid?("5")).to eq false
+    end
+
+    it "returns true if a move is not already taken" do
+      game = Game.new
+      game.board.fill_cell(1,1,"X")
+
+      expect(game.move_valid?("2")).to eq true
+    end
+
+  end
+
+  describe Game, "#switch_turn" do
+    it "changes the active player from one to the other" do
+      game = Game.new
+      expect(game.current_marker).to eq "X"
+      game.switch_turn
+      expect(game.current_marker).to eq "O"
+    end
+  end
 end
