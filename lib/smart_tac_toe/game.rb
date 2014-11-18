@@ -57,7 +57,7 @@ module SmartTacToe
 
     def enter_terminal(move)
       move = handle_terminal(move)
-      board.fill_cell_from_move(move)
+      board.fill_cell_from_move(move,current_marker)
    end
 
     def handle_terminal(move)
