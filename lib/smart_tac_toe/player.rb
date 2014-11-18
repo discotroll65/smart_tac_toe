@@ -39,16 +39,20 @@ module SmartTacToe
     def fill_pending_win(board)
       win_pending = about_to_win?(board)
       if win_pending[:answer]
-        possible_wins = board.win_combos
-        move_to_make = nil
-        cell_array = possible_wins[win_pending[:imm_win_index]]
-        combo_of_interest = board.array_of_combo_values(cell_array)
-        combo_of_interest.each do |move|
-          move_to_make = move if move_valid?(move,board) #move_valid? in Moveable
-        end
+        move_to_make = move_to_win(board)
         board.fill_cell_from_move(move_to_make,self.marker)
       end
+    end
 
+    def move_to_win(board)
+      possible_wins = board.win_combos
+      move_to_make = nil
+      cell_array = possible_wins[self.about_to_win?(board)[:imm_win_index]]
+      combo_of_interest = board.array_of_combo_values(cell_array)
+      combo_of_interest.each do |move|
+        move_to_make = move if move_valid?(move,board) #move_valid? in Moveable
+      end
+      move_to_make
     end
 
   end

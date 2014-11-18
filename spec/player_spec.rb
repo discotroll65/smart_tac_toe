@@ -24,6 +24,17 @@ module SmartTacToe
      end
   end
 
+  describe Player, "#move_to_win(board)" do
+    it "returns the move that will make the player win" do
+      board = Board.new
+      player = Player.new
+      board.fill_cell_from_move("1","X")
+      board.fill_cell_from_move("2","X")
+
+      move_to_make = player.move_to_win(board)
+      expect(move_to_make).to eq "3"
+    end
+  end
   describe Player, "#count_marks(combo)" do
     it "counts how many of that player's marks are in an available win combo" do
       board = Board.new
