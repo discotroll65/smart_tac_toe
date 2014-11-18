@@ -21,6 +21,11 @@ module SmartTacToe
       cell.value = input
     end
 
+    def fill_cell_from_move(move, input)
+      grid_coords = convert_move_to_coords(move)
+      fill_cell(grid_coords[0],grid_coords[1],input)
+    end
+
     def diagonals
       [  [ grid[0][0],grid[1][1],grid[2][2] ] ,  [  grid[0][2],grid[1][1],grid[2][0]  ]  ]
     end
@@ -72,6 +77,10 @@ module SmartTacToe
       result = true
       result = false if available_moves.size != 0
       result
+    end
+
+    def array_of_combo_values(combo_of_cells)
+      combo_of_cells.map {|cell| cell.value }
     end
 
     def available_moves

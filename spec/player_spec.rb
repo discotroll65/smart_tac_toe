@@ -31,12 +31,32 @@ module SmartTacToe
       board.fill_cell(0,0,"X")
       board.fill_cell(0,1,"X")
       combo = board.win_combos[0]
-      count = player.count_marks(combo)
+      count = player.count_marks(combo,"X")
       expect(count).to eq 2
     end
-
   end
 
+  describe Player, "#fill_pending_win(board)" do
+    board = Board.new
+    player1 = Player.new("X")
+    player2 = Player.new("O")
+    it "fills the last square in a combination about to win" do
+      board.fill_cell(0,0,"X")
+      board.fill_cell(0,1,"X")
+
+      possible_wins = board.win_combos
+      player1.fill_pending_win(board)
+      affected_combo = board.array_of_combo_values(possible_wins[0])
+      expect(affected_combo).to eq ["X","X","X"]
+
+      board.fill_cell(0,2,"3")
+
+      possible_wins = board.win_combos
+      player2.fill_pending_win(board)
+      affected_combo = board.array_of_combo_values(possible_wins[0])
+      expect(affected_combo).to eq ["X","X","O"]
 
 
+    end
+  end
 end

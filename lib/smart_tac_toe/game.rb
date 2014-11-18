@@ -57,9 +57,8 @@ module SmartTacToe
 
     def enter_terminal(move)
       move = handle_terminal(move)
-      grid_coords = convert_move_to_coords(move)
-      board.fill_cell(grid_coords[0],grid_coords[1],current_marker)
-    end
+      board.fill_cell_from_move(move)
+   end
 
     def handle_terminal(move)
       while !move_valid?(move)
@@ -71,18 +70,6 @@ module SmartTacToe
       end
       move
     end
-
-    def move_valid?(move)
-      result = true
-      coordinate_array = convert_move_to_coords(move) #in Movable module
-
-      board_spot = board.get_cell(coordinate_array[0],coordinate_array[1]) if coordinate_array != nil
-
-      result = false if board_spot != move
-      result
-    end
-
-
 
     def switch_turn
       self.players = [self.players[1], self.players[0]]

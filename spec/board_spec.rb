@@ -208,4 +208,28 @@ module SmartTacToe
     end
   end
 
+  describe Board, "#array of combo_values(combo_of_cells)" do
+    it "returns an array of strings representing the values of a combo of cells" do
+
+      board = Board.new
+      board.fill_cell(0,0,"X")
+      board.fill_cell(0,1,"O")
+      possible_wins = board.win_combos
+
+      result = board.array_of_combo_values(possible_wins[0])
+      expect(result).to eq ["X","O","3"]
+
+    end
+  end
+
+  describe Board, "#fill_cell_from_move(move,input)" do
+    it "fills a specified cell on the board corresponding to a move" do
+      board = Board.new
+      move = "1"
+      board.fill_cell_from_move(move,"X")
+      result = board.get_cell(0,0)
+      expect(result).to eq "X"
+    end
+  end
+
 end
