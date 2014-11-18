@@ -1,6 +1,7 @@
 require "spec_helper"
 
 module SmartTacToe
+
   describe Board, "#grid" do
     it "by default is a grid of 3 rows and 3 columns" do
       default_board = Board.new
@@ -190,4 +191,21 @@ module SmartTacToe
 
     end
   end
+
+  describe Board, "#available_winning_combos" do
+    it "returns wincombos that don't have two players in them" do
+      board = Board.new
+      board.fill_cell(0,1,"X")
+      board.fill_cell(0,0,"O")
+      board.fill_cell(0,2,"X")
+      board.fill_cell(1,0,"X")
+      board.fill_cell(2,0,"O")
+      
+      available_wins =  [["3","6","9"],["1","5","9"],["4","5","6"],["7","8","9"], ["2","5","8"]].sort!
+      result = board.available_winning_combos
+      expect(result.size).to eq 5
+      expect(result.sort!).to eq available_wins
+    end
+  end
+
 end

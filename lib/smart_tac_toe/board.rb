@@ -1,8 +1,12 @@
-require_relative "./strategy.rb"
+require_relative "./movable.rb"
+require_relative "./strategic.rb"
+
 module SmartTacToe
   class Board
+    include Movable
+    include Strategic
+
     attr_accessor :grid
-    include Strategy
     def initialize (input = Board.default)
       @grid = input
     end
@@ -23,6 +27,20 @@ module SmartTacToe
 
     def win_combos
       grid + grid.transpose + diagonals
+    end
+
+    def available_winning_combos
+      combo_indices = []
+
+      win_combos.each_with_index do |combo, index|
+        unless combo_dead?(combo)
+          combo_indices << index
+        end
+      end
+
+      available_combos = combo_mapper(combo_indices)
+      available_combos
+
     end
 
     def combo_win? (cell_combo)

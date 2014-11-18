@@ -1,8 +1,10 @@
+require_relative "./movable.rb"
 module SmartTacToe
   class Game
+    include Movable
     attr_reader :board
     attr_accessor :players
-    def initialize( player1 = HumanPlayer.new, player2 = HumanPlayer.new )
+    def initialize( player1 = Player.new, player2 = Player.new )
       player1.marker = "X"
       player2.marker = "O"
 
@@ -15,10 +17,6 @@ module SmartTacToe
       players[0].marker
     end
 
-    def convert_move_to_coords
-      
-    end
-    
     def play_in_console
       puts "Welcome to Tic Tac Toe!"
       puts "Choose your opponent:"
@@ -76,7 +74,7 @@ module SmartTacToe
 
     def move_valid?(move)
       result = true
-      coordinate_array = convert_move_to_coords(move)
+      coordinate_array = convert_move_to_coords(move) #in Movable module
 
       board_spot = board.get_cell(coordinate_array[0],coordinate_array[1]) if coordinate_array != nil
 
@@ -85,20 +83,6 @@ module SmartTacToe
     end
 
 
-    def convert_move_to_coords( move)
-      mapping_hash = {
-        "1" => [0,0],
-        "2" => [0,1],
-        "3" => [0,2],
-        "4" => [1,0],
-        "5" => [1,1],
-        "6" => [1,2],
-        "7" => [2,0],
-        "8" => [2,1],
-        "9" => [2,2]
-      }
-      mapping_hash[move]
-    end
 
     def switch_turn
       self.players = [self.players[1], self.players[0]]
