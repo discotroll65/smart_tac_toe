@@ -11,12 +11,15 @@ module SmartTacToe
     end
 
     def about_to_win?(board)
-      result = false
+      result = {answer: false, imm_win_index: nil}
       win_combos = board.win_combos
 
-      win_combos.each do |combo|
+      win_combos.each_with_index do |combo,index|
         marks = self.count_marks(combo)
-        result = true if marks == 2 && !combo_dead?(combo)
+        if marks == 2 && !combo_dead?(combo)
+          result[:answer] = true 
+          result[:imm_win_index] = index
+        end
       end
 
       result

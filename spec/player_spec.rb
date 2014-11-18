@@ -14,12 +14,14 @@ module SmartTacToe
     it "returns true if a player has an imminent win" do
       board.fill_cell(0,0,"X")
       board.fill_cell(0,1,"X")
-      expect(player.about_to_win?(board)).to eq true
+      result = player.about_to_win?(board)[:answer]
+      expect(result).to eq true
     end
     it "returns false if a player does not have an imminent win" do
       board.fill_cell(0,2,"O")
-      expect(player.about_to_win?(board)).to eq false
-    end
+      result = player.about_to_win?(board)[:answer]
+      expect(result).to eq false
+     end
   end
 
   describe Player, "#count_marks(combo)" do
