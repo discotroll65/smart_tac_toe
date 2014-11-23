@@ -70,6 +70,20 @@ module SmartTacToe
     end
   end
 
+  describe Player, "#open_moves_of_one_filled_combos(board)" do
+    it "returns an array of arrays, with each inner array containing open moves in a combo that has only one move filled." do
+
+      board = Board.new
+      player = Player.new("X")
+      board.fill_cell_from_move("1","O")
+      board.fill_cell_from_move("5","X")
+      board.fill_cell_from_move("3","X")
+
+      result = player.open_moves_of_one_filled_combos(board)
+      expect(result).to eq [["2","8"],["4","6"],["6","9"]]
+    end 
+  end
+
   describe Player, "#fill_pending_win(board)" do
     board = Board.new
     player1 = Player.new("X")

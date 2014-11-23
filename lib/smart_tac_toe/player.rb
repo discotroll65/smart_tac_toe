@@ -39,13 +39,25 @@ module SmartTacToe
     def one_filled_combo_amount(board)
       result = 0 
       marker = self.marker
-
       wincombos = board.win_combos
       wincombos.each do |combo|
         result += 1 if count_marks(combo, marker) == 1
       end
-
       result
+    end
+
+    def open_moves_of_one_filled_combos(board)
+      marker = self.marker
+      open_move_array = []
+      checkable_combos = board.win_combos
+
+      checkable_combos.each do |combo|
+        if count_marks(combo, marker) == 1 && !combo_dead?(combo)
+          open_move_array << available_combo_moves(combo)
+        end
+      end
+
+      open_move_array.sort!
     end
 
     def fill_pending_win(board)

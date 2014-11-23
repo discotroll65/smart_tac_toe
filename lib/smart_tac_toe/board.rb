@@ -75,7 +75,7 @@ module SmartTacToe
 
     def game_tied?
       result = true
-      result = false if available_moves.size != 0
+      result = false if available_board_moves.size != 0
       result
     end
 
@@ -83,21 +83,18 @@ module SmartTacToe
       combo_of_cells.map {|cell| cell.value }
     end
 
-    def available_moves
-      all_moves = (1..9).to_a.map {|move| move.to_s}
+    def available_board_moves
       move_array = []
 
       grid.each do |row|
-        row.each do |square|
-          union =  ([square.value] & all_moves) 
-          if union != []
-            move_array << union[0]
-          end
-        end
+        free_row_cells = available_combo_moves(row)
+        free_row_cells.each {|cell| move_array << cell}
       end
 
       move_array
     end
+
+
 private
     def self.default
       default_grid = Array.new(3) {Array.new(3) {Cell.new} }
