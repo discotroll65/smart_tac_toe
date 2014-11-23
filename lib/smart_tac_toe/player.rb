@@ -28,12 +28,24 @@ module SmartTacToe
       result
     end
 
-    def count_marks(combo,mark)
+    def count_marks(combo,mark) #combo is an array of cells
       count = 0
       combo.each do |cell|
         count += 1 if cell.value == mark
       end
       count
+    end
+
+    def one_filled_combo_amount(board)
+      result = 0 
+      marker = self.marker
+
+      wincombos = board.win_combos
+      wincombos.each do |combo|
+        result += 1 if count_marks(combo, marker) == 1
+      end
+
+      result
     end
 
     def fill_pending_win(board)

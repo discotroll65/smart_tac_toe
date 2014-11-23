@@ -35,6 +35,29 @@ module SmartTacToe
       expect(move_to_make).to eq "3"
     end
   end
+
+  describe Player, "#one_filled_combo_amount(board)" do
+    it "returns the number of combos having only one cell filled in" do
+      player = Player.new
+      board_mid = Board.new
+      board_corner = Board.new
+      board_center = Board.new
+
+      board_mid.fill_cell_from_move("2","X")
+      result = player.one_filled_combo_amount(board_mid)
+      expect(result).to eq 2
+
+      board_corner.fill_cell_from_move("1","X")
+      result = player.one_filled_combo_amount(board_corner)
+      expect(result).to eq 3
+
+      board_center.fill_cell_from_move("5","X")
+      result = player.one_filled_combo_amount(board_center)
+      expect(result).to eq 4
+
+    end
+  end
+
   describe Player, "#count_marks(combo)" do
     it "counts how many of that player's marks are in an available win combo" do
       board = Board.new
