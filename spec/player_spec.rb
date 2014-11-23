@@ -84,6 +84,21 @@ module SmartTacToe
     end 
   end
 
+  describe Player, "#overlapping_solution_cells(open_moves_in_combos)" do
+    it "returns an array of available moves located at the intersection of two available win combos that have one cell filled in" do
+
+      board = Board.new
+      player = Player.new("X")
+      board.fill_cell_from_move("1","O")
+      board.fill_cell_from_move("5","X")
+      board.fill_cell_from_move("3","X")
+
+      open_moves_in_combos = player.open_moves_of_one_filled_combos(board)
+      result = player.overlapping_solution_cells(open_moves_in_combos)
+      expect(result).to eq ["6"]
+    end 
+  end
+  
   describe Player, "#fill_pending_win(board)" do
     board = Board.new
     player1 = Player.new("X")

@@ -60,6 +60,19 @@ module SmartTacToe
       open_move_array.sort!
     end
 
+    def overlapping_solution_cells(open_moves_in_combos)
+      overlapping_cells = []
+      open_moves_in_combos.each do |solution|
+        open_moves_in_combos.each do |other_solution|
+          overlap = (solution & other_solution)[0]
+          if (solution != other_solution) && (overlap != nil)
+            overlapping_cells << overlap
+          end
+        end
+      end
+      overlapping_cells.uniq!
+    end
+
     def fill_pending_win(board)
       win_pending = about_to_win?(board)
       if win_pending[:answer]
