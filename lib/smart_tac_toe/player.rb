@@ -20,7 +20,7 @@ module SmartTacToe
       win_combos.each_with_index do |combo,index|
         o_marks = count_marks(combo,"O") if mode == "O" || mode == "both"
         x_marks = count_marks(combo,"X") if mode == "X" || mode == "both"
-        if o_marks == 2 || x_marks == 2 && !combo_dead?(combo)
+        if (o_marks == 2 || x_marks == 2) && !combo_dead?(combo)
           result[:answer] = true 
           result[:imm_win_index] = index
         end
@@ -111,7 +111,8 @@ module SmartTacToe
         end
 
       end
-      bad_moves.uniq!
+      bad_moves.uniq! if bad_moves.size > 0
+      bad_moves
     end
 
     def knockout_moves(board, moves_checking= board.available_board_moves)
@@ -149,10 +150,11 @@ module SmartTacToe
       killer_moves
     end
 
-    def fill_pending_win(board)
-      win_pending = about_to_win?(board)
+    def fill_pending_win(board, search_mode = "both")
+      mode = search_mode
+      win_pending = about_to_win?(board,mode)
       if win_pending[:answer]
-        move_to_make = move_to_win(board)
+        move_to_make = move_to_win(board, mode)
         board.fill_cell_from_move(move_to_make,self.marker)
       end
     end

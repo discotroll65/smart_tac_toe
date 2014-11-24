@@ -1,3 +1,4 @@
+require 'pry'
 require_relative "../lib/smart_tac_toe.rb"
 
 game = SmartTacToe::Game.new
