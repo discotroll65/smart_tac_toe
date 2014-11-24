@@ -58,8 +58,22 @@ module SmartTacToe
     end
   end
 
+ describe Player, "#knockout_moves(board)" do
+    it "returns all the moves that would allow player to force a win" do
+      player = Player.new ("X")
+      board = Board.new
+
+      board.fill_cell_from_move("7","X")
+      board.fill_cell_from_move("1","O")
+      result = player.knockout_moves(board)
+      expect(result).to eq ["3","8","9"]
+
+    end
+  end
+
+
   describe Player, "#losing_moves(board)" do
-    it "returns all the moves that would allow the other player to force a win" do
+    it "returns all the moves that would allow opponent to force a win" do
       player = Player.new ("O")
       board_mid = Board.new
       board_corner = Board.new

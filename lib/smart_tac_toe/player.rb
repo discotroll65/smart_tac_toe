@@ -84,7 +84,6 @@ module SmartTacToe
         hyp_open_moves = open_moves - [hyp_self_move]
         first_hyp_board = Marshal.load(Marshal.dump(board))
         first_hyp_board.fill_cell_from_move(hyp_self_move,marker)
-#binding.pry
         hyp_open_moves.each do |opponent_retort|
           deep_hyp_board = Marshal.load(Marshal.dump(first_hyp_board))
           deep_hyp_board.fill_cell_from_move(opponent_retort,opponent_marker)
@@ -113,6 +112,41 @@ module SmartTacToe
 
       end
       bad_moves.uniq!
+    end
+
+    def knockout_moves(board, moves_checking= board.available_board_moves)
+      marker = self.marker
+      marker == "X" ? opponent_marker="O":opponent_marker = "X"
+      open_moves = moves_checking
+      killer_moves = []
+
+      open_moves.each do |hyp_move|
+        deep_hyp_board = Marshal.load(Marshal.dump(board))
+        deep_hyp_board.fill_cell_from_move(hyp_move,marker)
+
+        if about_to_win?(deep_hyp_board, marker)[:answer]
+          attacker_wincell = move_to_win(deep_hyp_board,marker) 
+
+          inception_board = Marshal.load(Marshal.dump(deep_hyp_board))
+          inception_board.fill_cell_from_move(attacker_wincell,opponent_marker)
+          defender_wincell = move_to_win(inception_board,opponent_marker) if about_to_win?(inception_board,opponent_marker)[:answer]
+        end
+
+        if one_filled_combo_amount(deep_hyp_board,marker) >= 2
+          open_moves_in_combos = open_moves_of_one_filled_combos(deep_hyp_board, marker)
+          overlapping_moves = overlapping_solution_cells(open_moves_in_combos)
+        end
+
+        overlapping_moves = [] if overlapping_moves == nil
+        overlapping_moves.each do |overlap|
+          if (overlap != nil && attacker_wincell != nil) && (overlap != attacker_wincell) && (defender_wincell == overlap || defender_wincell == nil)
+            killer_moves << hyp_move
+          end
+        end
+
+      end
+
+      killer_moves
     end
 
     def fill_pending_win(board)
