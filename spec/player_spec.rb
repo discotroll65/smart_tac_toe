@@ -58,6 +58,29 @@ module SmartTacToe
     end
   end
 
+  describe Player, "#losing_moves(board)" do
+    it "returns all the moves that would allow the other player to force a win" do
+      player = Player.new ("O")
+      board_mid = Board.new
+      board_corner = Board.new
+      board_center = Board.new
+
+      board_center.fill_cell_from_move("5","X")
+      result = player.losing_moves(board_center)
+      expect(result).to eq ["2","4","6","8"]
+
+      board_mid.fill_cell_from_move("2","X")
+      result = player.losing_moves(board_mid)
+      expect(result).to eq ["4","6","7","9"]
+
+      board_corner.fill_cell_from_move("1","X")
+      result = player.losing_moves(board_corner)
+      expect(result).to eq ["2","3","4","6","7","8","9"]
+
+
+    end
+  end
+
   describe Player, "#count_marks(combo)" do
     it "counts how many of that player's marks are in an available win combo" do
       board = Board.new
