@@ -9,14 +9,6 @@ module SmartTacToe
     end
   end
 
-  describe Game do
-    it "does stuff" do
-
-      game = Game.new
-      game.hal_turn
-    end
-  end
-
   describe Game, "#convert_move_to_coords" do
     it "Takes a number 1 - 9, and converts it to board coordinates" do
       
