@@ -26,51 +26,22 @@ module SmartTacToe
 
       choice = gets.strip
 
-      if choice == "1"
-        self.human_game
-      else
-        self.computer_game
-      end
+      self.computer_game(choice)
       puts"\n\n\n\n"
     end
 
-    def human_game
-
-      while true
-
-        board.terminal_display
-        puts
-        puts "#{current_marker}'s turn. Enter your move:"
-        print ">>"
-
-        move = gets.strip
-
-        enter_terminal(move)
-
-        break if board.game_won? || board.game_tied?
-        switch_turn
-      end
-
-      board.terminal_display
-      puts "Game Over!"
-      puts "#{current_marker} wins!" if board.game_won?
-      puts "Cat's Game!" if board.game_tied?
-      puts "~~~~~~~~~~~~~~~~~~~~"
-
-    end
-
-    def computer_game
+    def computer_game(choice)
       coinflip = [-1,1].sample
       player_flag = -1*coinflip
 
       puts
       puts
-      if player_flag == -1
+      if player_flag == -1 && choice == "2"
         puts"HAL 2014 has randomly been chosen to go first"
       end
 
       while true
-        if player_flag == 1
+        if player_flag == 1 || choice == "1"
           board.terminal_display
           puts
           puts "#{current_marker}'s turn. Enter your move:"
@@ -82,6 +53,7 @@ module SmartTacToe
         else
           hal_turn
         end
+
         break if board.game_won? || board.game_tied?
         player_flag *= -1
         switch_turn
