@@ -75,7 +75,7 @@ module SmartTacToe
 
     def game_tied?
       result = true
-      result = false if available_board_moves.size != 0
+      result = false if available_board_moves.size != 0 || self.game_won?
       result
     end
 

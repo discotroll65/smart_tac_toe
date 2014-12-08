@@ -137,18 +137,15 @@ module SmartTacToe
   describe Board, "#game_tied?" do
     it "returns true if all squares are taken up" do
       board = Board.new
-      marker = -1
-
-      board.grid.each do |row|
-        row.each do |square|
-          if marker > 0
-            square.value = "X"
-          else
-            square.value = "O"
-          end
-          marker *= -1
-        end
-      end
+      board.fill_cell_from_move("1","X")
+      board.fill_cell_from_move("5","O")
+      board.fill_cell_from_move("4","X")
+      board.fill_cell_from_move("7","O")
+      board.fill_cell_from_move("3","X")
+      board.fill_cell_from_move("2","O")
+      board.fill_cell_from_move("8","X")
+      board.fill_cell_from_move("9","O")
+      board.fill_cell_from_move("6","X")
 
       expect(board.game_tied?).to eq true
     end
