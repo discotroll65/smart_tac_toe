@@ -38,12 +38,24 @@ print ">>"
 choice = gets.strip
 
 #See who goes first
-coinflip = [-1,1].sample
-player_flag = -1*coinflip
+if choice == "2"
+  puts "Do you want to go first or second?"
+  puts "First: 1"
+  puts "Second: 2"
+  print ">>"
+
+  starter_choice = gets.strip
+end
+
+if starter_choice == "2"
+  player_flag = -1
+else
+  player_flag = 1
+end
 
 puts "\n\n"
 if player_flag == -1 && choice == "2"
-  puts"HAL 2014 has randomly been chosen to go first"
+  puts "Okay, HAL 2014 will go first"
 end
 
 #Play game until someone wins
