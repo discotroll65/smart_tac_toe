@@ -1,4 +1,3 @@
-require_relative "./movable.rb"
 require_relative "./strategic.rb"
 
 module SmartTacToe
