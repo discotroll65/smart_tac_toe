@@ -1,4 +1,5 @@
 require 'pry'
+require 'pry-byebug'
 require_relative "../lib/smart_tac_toe.rb"
 
 def enter_terminal(move, game)
@@ -11,6 +12,7 @@ end
 
 def handle_terminal(move, game)
   board = game.board
+  current_marker = game.current_marker
 
   while !game.move_valid?(move)
     board.terminal_display
@@ -40,7 +42,6 @@ coinflip = [-1,1].sample
 player_flag = -1*coinflip
 
 puts "\n\n"
-
 if player_flag == -1 && choice == "2"
   puts"HAL 2014 has randomly been chosen to go first"
 end
@@ -59,7 +60,7 @@ while true
 
   else
     game.hal_turn
-    puts "HAL 2014 has mad its move"
+    puts "HAL 2014 has made its move"
   end
 
   break if board.game_won? || board.game_tied?
