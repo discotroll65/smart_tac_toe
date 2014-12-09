@@ -3,7 +3,6 @@ require_relative "./strategic.rb"
 
 module SmartTacToe
   class Board
-    include Movable
     include Strategic
 
     attr_accessor :grid
@@ -122,6 +121,21 @@ module SmartTacToe
         end
       end
       move_array
+    end
+
+    def convert_move_to_coords( move)
+      mapping_hash = {
+        "1" => [0,0],
+        "2" => [0,1],
+        "3" => [0,2],
+        "4" => [1,0],
+        "5" => [1,1],
+        "6" => [1,2],
+        "7" => [2,0],
+        "8" => [2,1],
+        "9" => [2,2]
+      }
+      mapping_hash[move]
     end
 
 private

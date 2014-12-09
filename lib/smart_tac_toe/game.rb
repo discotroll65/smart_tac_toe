@@ -1,9 +1,10 @@
 require_relative "./movable.rb"
+
 module SmartTacToe
   class Game
-    include Movable
     attr_reader :board
     attr_accessor :players
+
     def initialize( player1 = Player.new, player2 = Player.new )
       player1.marker = "X"
       player2.marker = "O"
@@ -17,7 +18,15 @@ module SmartTacToe
       players[0].marker
     end
 
+    def move_valid?(move,board = self.board)
+      result = true
+      coordinate_array = board.convert_move_to_coords(move)
 
+      board_spot = board.get_cell(coordinate_array[0],coordinate_array[1]) if coordinate_array != nil
+
+      result = false if board_spot != move
+      result
+    end
 
     def hal_turn
       if players[0].about_to_win?(board,players[0].marker)[:answer]

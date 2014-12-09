@@ -13,10 +13,11 @@ module SmartTacToe
     it "Takes a number 1 - 9, and converts it to board coordinates" do
       
       game = Game.new
+      board = game.board
 
       move_inputs = 1..9
       move_inputs = move_inputs.to_a.map {|move| move.to_s}
-      move_outputs = move_inputs.map {|move| game.convert_move_to_coords(move)}
+      move_outputs = move_inputs.map {|move| board.convert_move_to_coords(move)}
 
 
       expect(move_outputs[0]).to eq [0,0]
