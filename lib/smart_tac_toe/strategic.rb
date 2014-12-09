@@ -1,38 +1,6 @@
 module SmartTacToe
   module Strategic
 
-
-
-    def combo_mapper(combo_indices)
-      combo_map_hash = {
-        0 => ["1","2","3"],
-        1 => ["4","5","6"],
-        2 => ["7","8","9"],
-        3 => ["1","4","7"],
-        4 => ["2","5","8"],
-        5 => ["3","6","9"],
-        6 => ["1","5","9"],
-        7 => ["3","5","7"]
-      }
-      available_combos = []
-      combo_indices.each do |combo_index|
-        available_combos << combo_map_hash[combo_index]
-      end
-      available_combos
-    end
-
-    def available_combo_moves(combo)
-      all_moves = (1..9).to_a.map {|move| move.to_s}
-      move_array = []
-      combo.each do |square|
-        union =  ([square.value] & all_moves) 
-        if union != []
-          move_array << union[0]
-        end
-      end
-      move_array
-    end
-
     def combo_dead?(combo)
       result = false
       bomb = ""
@@ -50,5 +18,6 @@ module SmartTacToe
 
       result
     end
+
   end
 end

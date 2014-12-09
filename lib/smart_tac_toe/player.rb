@@ -54,7 +54,7 @@ module SmartTacToe
 
       checkable_combos.each do |combo|
         if count_marks(combo, marker) == 1 && !combo_dead?(combo)
-          open_move_array << available_combo_moves(combo)
+          open_move_array << board.available_combo_moves(combo)
         end
       end
 
