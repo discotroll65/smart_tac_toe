@@ -1,23 +1,18 @@
 # SmartTacToe
 
-A gem to assist in playing tic tac toe against an unbeatable computer opponent
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'smart_tac_toe'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install smart_tac_toe
-
+A gem to assist in playing tic tac toe against an unbeatable computer opponent.
+Code has full test coverage, and was developed using TDD.
 ## Usage
 
-TODO: Write usage instructions here
+To run, clone the repo:
+```$ git clone https://github.com/discotroll65/smart_tac_toe.git```
+
+Then go to the directory:
+```$ cd smart_tac_toe```
+
+and run the example file:
+```$ ruby example/example.rb```
+
 
 ## Contributing
 
